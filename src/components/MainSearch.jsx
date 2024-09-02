@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Container, Row, Col, Form,Button } from "react-bootstrap";
 import Job from "./Job";
+import { useNavigate } from "react-router-dom"; 
+
 
 const MainSearch = () => {
   const [query, setQuery] = useState("");
   const [jobs, setJobs] = useState([]);
+    const navigate = useNavigate();
 
   const baseEndpoint = "https://strive-benchmark.herokuapp.com/api/jobs?search=";
 
@@ -38,6 +41,14 @@ const MainSearch = () => {
           <Form onSubmit={handleSubmit}>
             <Form.Control type="search" value={query} onChange={handleChange} placeholder="type and press Enter" />
           </Form>
+        </Col>
+        <Col xs={10} className="mx-auto mb-3">
+          <Button 
+            variant="primary" 
+            onClick={() => navigate('/favourites')} 
+          >
+            Vai ai Preferiti
+          </Button>
         </Col>
         <Col xs={10} className="mx-auto mb-5">
           {jobs.map(jobData => (
