@@ -46,6 +46,7 @@ const MainSearch = () => {
           <Button 
             variant="primary" 
             onClick={() => navigate('/favourites')} 
+            className='mt-3'
           >
             Vai ai Preferiti
           </Button>

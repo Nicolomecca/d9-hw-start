@@ -1,10 +1,14 @@
-// FavouritesPage.jsx
 import { useSelector } from 'react-redux';
-import { Container, ListGroup } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Container, ListGroup, Button } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 
 const FavouritesPage = () => {
   const favourites = useSelector(state => state.main.favourites);
+  const navigate = useNavigate(); 
+
+  const goToHome = () => {
+    navigate('/'); 
+  };
 
   return (
     <Container>
@@ -16,6 +20,13 @@ const FavouritesPage = () => {
           </ListGroup.Item>
         ))}
       </ListGroup>
+      <Button 
+        variant="primary" 
+        className="mt-3" 
+        onClick={goToHome} 
+      >
+        Torna alla Home
+      </Button>
     </Container>
   );
 };
