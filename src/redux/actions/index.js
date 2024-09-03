@@ -1,33 +1,34 @@
-export const AGGIUNGIFAVORITI = "ADD_TO_FAVOURITES";
-export const GET_COMPANY ='GET_COMPANY'
-export const addFavourites = (data) => {
-  return {
-    type: AGGIUNGIFAVORITI,
-    payload: data.company_name,
-  };
-};
+export const ADD_TO_FAVOURITE = 'ADD_TO_FAVOURITE'
+export const REMOVE_FROM_FAVOURITE = 'REMOVE_FROM_FAVOURITE'
+export const GET_JOBS = 'GET_JOBS'
 
-export const fetchArrayData = (query) => {
-    return (dispatch) => {
-      const baseEndpoint = "https://strive-benchmark.herokuapp.com/api/jobs?search=";
-  
-      fetch(baseEndpoint + query + "&limit=20")
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error('Error fetching results');
-          }
+const baseEndpoint = 'https://strive-benchmark.herokuapp.com/api/jobs?search='
+
+export const addToFavouriteAction = (company) => ({
+  type: ADD_TO_FAVOURITE,
+  payload: company,
+})
+
+export const removeFromFavouriteAction = (company) => ({
+  type: REMOVE_FROM_FAVOURITE,
+  payload: company,
+})
+
+export const getJobsAction = (query) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(baseEndpoint + query + '&limit=20')
+      if (response.ok) {
+        const { data } = await response.json()
+        dispatch({
+          type: GET_JOBS,
+          payload: data,
         })
-        .then(({ data }) => {
-          dispatch({
-            type: GET_COMPANY,
-            payload: data, 
-          });
-        })
-        .catch((error) => {
-          console.error(error);
-          alert("Error fetching results");
-        });
-    };
-  };
+      } else {
+        alert('Error fetching results')
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}

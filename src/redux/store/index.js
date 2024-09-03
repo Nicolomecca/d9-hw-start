@@ -1,13 +1,14 @@
-import { configureStore,combineReducers} from "@reduxjs/toolkit";
-import mainReducer from "../reducers";
-import searchReducer from "../reducers/fetchData";
+import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import favouriteReducer from '../reducers/favourite'
+import jobReducer from '../reducers/job'
 
-const rootReducer = combineReducers({
-    favourites : mainReducer,
-    search : searchReducer,
+const bigReducer = combineReducers({
+  favourite: favouriteReducer,
+  job: jobReducer,
 })
 
 const store = configureStore({
-    reducer: rootReducer
+  reducer: bigReducer,
 })
+
 export default store
