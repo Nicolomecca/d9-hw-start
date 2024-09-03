@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Container, Row, Col,Button } from "react-bootstrap";
 import Job from "./Job";
 import { useParams } from "react-router-dom";
+import { StarFill } from 'react-bootstrap-icons'
+
 
 const CompanySearchResults = () => {
   const [jobs, setJobs] = useState([]);
