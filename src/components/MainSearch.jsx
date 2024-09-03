@@ -2,9 +2,12 @@ import { useState } from "react";
 import { Container, Row, Col, Form,Button } from "react-bootstrap";
 import Job from "./Job";
 import { useNavigate } from "react-router-dom"; 
+import { fetchArrayData } from "../redux/actions";
+import { useDispatch } from "react-redux";
 
 
 const MainSearch = () => {
+  const dispatch = useDispatch();
   const [query, setQuery] = useState("");
   const [jobs, setJobs] = useState([]);
     const navigate = useNavigate();
@@ -23,6 +26,7 @@ const MainSearch = () => {
       if (response.ok) {
         const { data } = await response.json();
         setJobs(data);
+        dispatch(fetchArrayData(data))
       } else {
         alert("Error fetching results");
       }

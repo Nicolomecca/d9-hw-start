@@ -1,22 +1,19 @@
+import { AGGIUNGIFAVORITI } from "../actions"
+
 const initialState = {
-    main: {
-      favourites: [], 
-    },
+  company: [], 
+}
+
+const mainReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case AGGIUNGIFAVORITI:
+      return {
+        ...state,
+        company: [...state.company, action.payload]
+      };
+    default:
+      return state;
   }
-  
-  const mainReducer = (state = initialState, action) => {
-    switch (action.type) {
-      case 'ADD_TO_FAVOURITES':
-        return {
-          ...state,
-          main: {
-            ...state.main,
-            favourites: [...state.main.favourites, action.payload], 
-          },
-        }
-      default:
-        return state
-    }
-  }
-  
-  export default mainReducer
+};
+
+export default mainReducer

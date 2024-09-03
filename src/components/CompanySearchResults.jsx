@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Col,Button } from "react-bootstrap";
+import { Container, Row, Col, } from "react-bootstrap";
 import Job from "./Job";
 import { useParams } from "react-router-dom";
-import { useDispatch,useSelector } from 'react-redux'
 
 const CompanySearchResults = () => {
   const [jobs, setJobs] = useState([]);

@@ -1,21 +1,19 @@
-import { Row, Col, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { Row, Col, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addFavourites } from "../redux/actions/index"; 
 
 const Job = ({ data }) => {
   const dispatch = useDispatch();
 
-  const addToFavourites = () => {
-    dispatch({
-      type: 'ADD_TO_FAVOURITES',
-      payload: data.company_name
-    });
-  };
+  if (!data) {
+    return null; 
+  }
 
   return (
     <Row
       className="mx-0 mt-3 p-3"
-      style={{ border: '1px solid #00000033', borderRadius: 4 }}
+      style={{ border: "1px solid #00000033", borderRadius: 4 }}
     >
       <Col xs={3}>
         <Link to={`/${data.company_name}`}>{data.company_name}</Link>
@@ -29,7 +27,7 @@ const Job = ({ data }) => {
         <Button
           variant="light"
           className="ms-4"
-          onClick={addToFavourites}
+          onClick={() => dispatch(addFavourites(data))}
         >
           ➕
         </Button>
